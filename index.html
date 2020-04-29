@@ -1,0 +1,346 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JavaScript - Rocketseat</title>
+</head>
+
+<body>
+    <div>
+        <h1>Módulo 01: Introdução JavaScript</h1>
+        <hr>
+        <h2>Módulo 01: Exercícios</h2>
+        <hr>
+        <div class="ex-01-01">
+            <img src="img/ex-01-01.jpg" alt="Exercicio 1">
+            <script>
+                console.log('1º exercício - OK')
+                var endereco = {
+                    rua: "Rua dos Pinheiros",
+                    numero: 1293,
+                    bairro: "Centro",
+                    cidade: "São Paulo",
+                    uf: "SP"
+                }
+                endereco = "O usuário mora em " + endereco.cidade + " / " + endereco.uf + ", no bairro " + endereco.bairro + ", na " + endereco.rua + " com nº " + endereco.numero + ".";
+                console.log(endereco); // OK
+            </script>
+            <hr>
+        </div>
+        <div class="ex-01-02">
+            <img src="img/ex-01-02.jpg" alt="Exercicio 2">
+            <script>
+                console.log('2º exercício - OK')
+                function pares(x, y) {
+                    //com FOR
+                    for (var i = x; i <= y; i++) {
+                        if (i % 2 == 0) {
+                            console.log(i);
+                        }
+                    }
+                    // com WHILE
+                    // while (x <= y) {
+                    //     if (x % 2 == 0) {
+                    //         console.log(x);
+                    //     }
+                    //     x++;
+                    // }
+                }
+                pares(1, 20); // OK
+            </script>
+            <hr>
+        </div>
+        <div class="ex-01-03">
+            <img src="img/ex-01-03.jpg" alt="Exercicio 3">
+            <script>
+                console.log('3º exercício - OK')
+                function temHabilidade(skill) {
+                    var skills = ["JavaScript", "ReactJS", "React Native"];
+                    if (skills.indexOf(skill) != -1) {
+                        console.log(true);
+                    } else {
+                        console.log(false);
+                    }
+                }
+                temHabilidade("ReactJS");
+            </script>
+            <hr>
+        </div>
+        <div class="ex-01-04">
+            <img src="img/ex-01-04.jpg" alt="Exercicio 4">
+            <script>
+                console.log('4º exercício - OK')
+                function experiencia(anos) {
+                    if (anos > 0 && anos <= 1) {
+                        console.log("Iniciante");
+                    } else if (anos > 1 && anos <= 3) {
+                        console.log("Intermediário");
+                    } else if (anos > 3 && anos <= 6) {
+                        console.log("Avançado");
+                    } else if (anos > 6) {
+                        console.log("Jedi Master");
+                    } else {
+                        console.log("Sem avaliação de experiência");
+                    }
+                }
+                experiencia(8);
+            </script>
+            <hr>
+        </div>
+        <div class="ex-01-05">
+            <img src="img/ex-01-05.jpg" alt="Exercicio 5">
+            <script>
+                console.log('5º exercício - OK')
+                var usuarios = [
+                    {
+                        nome: "Diego",
+                        habilidades: ["JavaScript", "ReactJS", "Redux"]
+                    },
+                    {
+                        nome: "Gabriel",
+                        habilidades: ["VueJS", "Ruby on Rails", "Elixir"]
+                    }
+                ];
+
+                var nomes = usuarios.map(function (usuario) {
+                    return usuario.nome;
+                });
+
+                var habilidades = usuarios.map(function (usuario) {
+                    return usuario.habilidades;
+                });
+
+                for (var i = 0; i < usuarios.length; i++) {
+                    var frase = "O " + nomes[i] + " possui as habilidades: " + habilidades[i];
+                    console.log(frase);
+                };
+            </script>
+            <hr>
+        </div>
+    </div>
+
+    <div>
+        <h1>Módulo 02: Manipulando a DOM</h1>
+        <hr>
+        <div>
+            <!-- DOM - arvore de elementos HTML -->
+            <!-- funções:
+            'onclick' quando for clicado
+            'onmouseover' quando mouse passar por cima
+            'onkeypress' quando digitar num input
+            -->
+            <!-- <button onclick="mostraAlerta()">Clique!</button> -->
+            <!-- <button onmouseover="mostraAlerta()">Clique!</button> -->
+            <!-- <input onkeypress="mostraAlerta()"></input> -->
+            <div id="app">
+                <input type="text" name="nome" id="nome" class="nome">
+                <button class="botao">Adicionar</button>
+            </div>
+            <div class="box">
+                <h3>BOX</h3>
+            </div>
+            <script>
+                //document (toda a DOM, todos os elementos HTML)
+                // ** buscando pelo ID
+                // var inputElement = document.getElementById('nome');
+                // ** buscando pela TAG <> (retorna vetor pq podem ter vários)
+                // var inputElement = document.getElementsByTagName('input');
+                // ** buscando pela CLASS (retorna vetor pq podem ter vários)
+                // var inputElement = document.getElementsByClassName('nome');
+                // ** buscando pela CLASS (retornando 1º, exemplo)
+                // var inputElement = document.getElementsByClassName('nome')[0];
+
+                // ** querySelector (permite percorrer toda a DOM - pode passar o caminho a percorrer pra encontrar elemento)
+                // var inputElement = document.querySelector('div#app input'); // body div div#app input
+                // var inputElement = document.querySelector('input[name=nome]'); // pela propriedade do elemento
+                // ** querySelectorAll (para trazer todos os elementos - retorna um vetor)
+                var inputElement = document.querySelectorAll('input');
+                console.log(inputElement);
+                var btnElement = document.querySelector('button.botao');
+                var inputElement = document.querySelector('input[name=nome');
+                btnElement.onclick = function () {
+                    var text = inputElement.value;
+                    alert(text);
+                }
+                console.log(btnElement);
+
+                // ** criando elementos via JS
+                // ** criando link
+                var linkElement = document.createElement('a');
+                // ** atribuindo href
+                linkElement.setAttribute('href', 'http://google.com');
+                linkElement.setAttribute('title', 'Site Google');
+                // ** criando texto do link
+                var textElement = document.createTextNode('Acessar Google');
+                // ** atribuindo texto ao link (como filho)
+                linkElement.appendChild(textElement);
+                // ** atribuindo link na div#app
+                var containerElement = document.querySelector('#app');
+                containerElement.appendChild(linkElement);
+                // ** removendo o input
+                var inputElement = document.querySelector('#nome');
+                containerElement.removeChild(inputElement);
+                console.log(containerElement);
+
+
+                // ** manipulando CSS/style
+                var boxElement = document.querySelector('.box');
+                boxElement.style.width = 200;
+                boxElement.style.height = 100;
+                boxElement.style.backgroundColor = '#f2f2f2';
+            </script>
+        </div>
+        <hr>
+        <h2>Módulo 02: Exercícios</h2>
+        <hr>
+        <div class="ex-02-01">
+            <img src="img/ex-02-01.jpg" alt="Exercicio 1">
+            <button id="btnEx0201">Clique!</button>
+            <script>
+                console.log('1º exercício - OK')
+                // var btnElement = document.querySelector('#btnEx0201');
+
+                // btnElement.onclick = function gerarQuadrado() {
+                //     var quadradoElement = document.createElement('div');
+                //     quadradoElement.setAttribute('id', 'gerarQuadrado');
+                //     quadradoElement.style.width = '100px';
+                //     quadradoElement.style.height = '100px';
+                //     quadradoElement.style.backgroundColor = 'red';
+                //     document.querySelector('.ex-02-01').appendChild(quadradoElement);
+                //     console.log(quadradoElement);
+                // }
+            </script>
+        </div>
+        <hr>
+        <div class="ex-02-02">
+            <img src="img/ex-02-02.jpg" alt="Exercicio 2">
+            <button id="btnEx0202">Clique!</button>
+            <script>
+                console.log('2º exercício - OK')
+
+                var btnElement = document.querySelector('#btnEx0202'); //ok
+                var divElement = document.querySelector('.ex-02-02'); //ok
+
+                btnElement.onclick = function gerarQuadrado() {
+                    var quadradoElement = document.createElement('div'); //ok
+                    quadradoElement.setAttribute('id', 'gerarQuadrado');
+                    quadradoElement.style.width = '100px';
+                    quadradoElement.style.height = '100px';
+                    quadradoElement.style.backgroundColor = 'red';
+                    document.querySelector('.ex-02-02').appendChild(quadradoElement);
+                    console.log(quadradoElement);
+                    // cores para quadrados gerados
+                    var colorElement = document.querySelector('#gerarQuadrado');
+                    colorElement.onmouseover = function () {
+                        colorElement.style.backgroundColor = getRandomColor();
+                    }
+                    divElement.appendChild(colorElement);
+                }
+                console.log(btnElement);
+                //gerar cores
+                function getRandomColor() {
+                    var letters = "0123456789ABCDEF";
+                    var color = "#";
+                    for (var i = 0; i < 6; i++) {
+                        color += letters[Math.floor(Math.random() * 16)];
+                    }
+                    return color;
+                }
+            </script>
+        </div>
+        <hr>
+        <div class="ex-02-03">
+            <img src="img/ex-02-03.jpg" alt="Exercicio 3">
+            <!-- <ul></ul> -->
+            <script>
+                console.log('3º exercício - OK')
+
+                // var nomes = ["Diego", "Gabriel", "Lucas"];
+                // var listElement = document.querySelector('ul');
+                // var itemElement = document.createElement('li');
+                // listElement.appendChild(itemElement);
+                // for (var i = 0; i < nomes.length; i++) {
+                //     var textElement = document.createTextNode(nomes[i]);
+                //     itemElement.appendChild(textElement);
+                // }
+                // console.log(listElement);
+            </script>
+        </div>
+        <hr>
+        <div class="ex-02-04">
+            <img src="img/ex-02-04.jpg" alt="Exercicio 4">
+            <ul></ul>
+            <input type="text" id="nome">
+            <button onclick="adicionar()">Adicionar</button>
+            <script>
+                console.log('4º exercício - OK')
+
+                var nomes = ["Diego", "Gabriel", "Lucas"];
+                var listElement = document.querySelector('ul');
+                var inputNewName = document.getElementById("nome");
+                for (var i = 0; i < nomes.length; i++) {
+                    adicionaItem(nomes[i]);
+                }
+                function adicionaItem(nome) {
+                    console.log("TCL: adicionaItem -> name", nome);
+                    var itemElement = document.createElement('li');
+                    var textElement = document.createTextNode(nome);
+                    itemElement.appendChild(textElement);
+                    listElement.appendChild(itemElement);
+                }
+                function adicionar() {
+                    adicionaItem(inputNewName.value);
+                    inputNewName.value = "";
+                }
+            </script>
+            <hr>
+        </div>
+    </div>
+
+    <div>
+        <h1>Módulo 03: App de Todos</h1>
+        <hr>
+        <div id="todos">
+            <ul>
+                <!-- itens da lista serão adicionados via JS -->
+            </ul>
+            <input type="text" placeholder="Digite um Todo">
+            <button>Adicionar</button>
+        </div>
+        <hr>
+    </div>
+
+    <div>
+        <h1>Módulo 04: JS Assíncrono</h1>
+        <hr>
+        <h2>Módulo 04: Exercícios</h2>
+        <hr>
+        <div class="ex-04-01">
+            <img src="img/ex-04-01.jpg" alt="Exercicio 1">
+            <hr>
+        </div>
+        <div class="ex-04-02">
+            <img src="img/ex-04-02.jpg" alt="Exercicio 2">
+            <ul>
+                <!-- itens da lista serão adicionados via JS -->
+            </ul>
+            <input type="text" name="user">
+            <button onclick="">Adicionar</button>
+            <hr>
+        </div>
+        <div class="ex-04-03">
+            <img src="img/ex-04-03.jpg" alt="Exercicio 3">
+            <hr>
+        </div>
+    </div>
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <!-- deve ser antes do arquivo JS -->
+    <script src="todos.js"></script>
+    <script src="main.js"></script>
+    <script src="mainEx.js"></script>
+
+</body>
+
+</html>
